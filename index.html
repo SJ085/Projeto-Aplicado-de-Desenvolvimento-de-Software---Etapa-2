@@ -1,235 +1,96 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-        <link rel="stylesheet" href="src/styles/styles.css" />
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Education</title>
 
-        <script
-            type="text/javascript"
-            src="https://npmcdn.com/parse/dist/parse.min.js"
-        ></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Ant Design CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.16.13/antd.min.css">
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
-        <script src="https://unpkg.com/scrollreveal"></script>
-        <title>Food</title>
-        <script src="https://replit.com/public/js/repl-auth-v2.js"></script>
-    </head>
+    <!-- Ant Design Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ant-design-icons/4.7.0/antd-icons.min.css">
 
-    <body>
-        <header>
-            <nav id="navbar">
-                <i class="fa-solid fa-laptop-code" id="nav_logo"> tech education</i>
+    <!-- Importar Parse SDK para Back4App -->
+    <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script>
+        // Inicializar Back4App
+        Parse.initialize("YOUR_APP_ID", "YOUR_JAVASCRIPT_KEY");
+        Parse.serverURL = 'https://parseapi.back4app.com/';
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo a Tech Education</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#info-tecnologia">Tecnologia</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#cadastro">Cadastro</a></li>
+            </ul>
+        </nav>
+    </header>
 
-                <ul id="nav_list">
-                    <li class="nav-item active">
-                        <a href="#home">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#menu">Sobre nós</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#testimonials">Comentarios</a>
-                    </li>
-                </ul>
+    <!-- Seção de tecnologia com imagem redirecionando -->
+    <section id="info-tecnologia">
+        <h2>Informações sobre Tecnologia</h2>
+        <p>Navegue e aprenda mais sobre as tecnologias do futuro.</p>
+        <a href="https://www.educacao.com.br" target="_blank">
+            <img src="logo.png" alt="Logo de Educação" class="logo-educacional">
+        </a>
+    </section>
 
-                <button class="btn-default">Peça aqui</button>
-
-                <button id="mobile_btn">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </nav>
-
-            <div id="mobile_menu">
-                <ul id="mobile_nav_list">
-                    <li class="nav-item">
-                        <a href="#home">Início</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#menu">Sobre nós</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#testimonials">comentarios</a>
-                    </li>
-                </ul>
-
-                <button class="btn-default">Peça aqui</button>
+    <!-- Formulário de Login com Ant Design -->
+    <section id="login">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="ant-form-item">
+                <label class="ant-form-item-label" for="login-username">Usuário</label>
+                <div class="ant-form-item-control">
+                    <input type="text" id="login-username" class="ant-input" placeholder="Usuário">
+                </div>
             </div>
-        </header>
-
-    
-
-            <section id="testimonials">
-                <img
-                    src="src/images/iconedeuser.png"
-                    id="testimonial_chef"
-                    alt="chefe"
-                />
-
-                <div id="testemonials_content">
-                    <h2 class="section-title">Tela de Login</h2>
             
-
-                    <div id="feedbacks">
-                        <div class="feedback">
-                            <img
-                                src="src/images/avatar.png"
-                                class="feedback-avatar"
-                                alt="avatar"
-                            />
-
-                            <div class="feedback-content">
-                                <form id="feedback_form">
-                                    <label for="nome">Nome:</label><br />
-                                    <input
-                                        type="text"
-                                        id="nome"
-                                        name="nome"
-                                        required
-                                    /><br /><br />
-
-                                    <label for="email">Email:</label><br />
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        required
-                                    /><br /><br />
-
-                                    <label for="comentario">Comentário:</label
-                                    ><br />
-                                    <textarea
-                                        id="comentario"
-                                        name="comentario"
-                                        rows="4"
-                                        cols="50"
-                                        required
-                                    ></textarea
-                                    ><br /><br />
-
-                                    <input
-                                        type="submit"
-                                        value="Enviar Comentário"
-                                    />
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section for displaying existing comments -->
-                    <div id="existing_feedbacks">
-                        <h3>Comentários Recentes:</h3>
-                        <div id="feedback_list"></div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <div id="footer_items">
-                <span id="copyrigth"> &copy 2024 UNIFOR </span>
-
-                <div class="social-media-buttons">
-                    <a href="#">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-
-                    <a href="#">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
+            <div class="ant-form-item">
+                <label class="ant-form-item-label" for="login-password">Senha</label>
+                <div class="ant-form-item-control">
+                    <input type="password" id="login-password" class="ant-input" placeholder="Senha">
                 </div>
             </div>
-        </footer>
 
-        <script src="src/javascript/script.js"></script>
-        <script>
-            // Initialize Parse
-            Parse.initialize(
-                "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
-                "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9",
-            );
-            Parse.serverURL = "https://parseapi.back4app.com/";
+            <button type="submit" class="ant-btn ant-btn-primary">
+                <i class="anticon anticon-login"></i> Entrar
+            </button>
+        </form>
+    </section>
 
-            // Handle form submission
-            document
-                .getElementById("feedback_form")
-                .addEventListener("submit", function (event) {
-                    event.preventDefault();
+    <!-- Formulário de Cadastro com Ant Design -->
+    <section id="cadastro">
+        <h2>Cadastro</h2>
+        <form id="signup-form">
+            <div class="ant-form-item">
+                <label class="ant-form-item-label" for="signup-username">Usuário</label>
+                <div class="ant-form-item-control">
+                    <input type="text" id="signup-username" class="ant-input" placeholder="Usuário">
+                </div>
+            </div>
+            
+            <div class="ant-form-item">
+                <label class="ant-form-item-label" for="signup-password">Senha</label>
+                <div class="ant-form-item-control">
+                    <input type="password" id="signup-password" class="ant-input" placeholder="Senha">
+                </div>
+            </div>
 
-                    const nome = document.getElementById("nome").value;
-                    const email = document.getElementById("email").value;
-                    const comentario =
-                        document.getElementById("comentario").value;
+            <button type="submit" class="ant-btn ant-btn-primary">
+                <i class="anticon anticon-user-add"></i> Cadastrar
+            </button>
+        </form>
+    </section>
 
-                    const Feedback = Parse.Object.extend("Feedback");
-                    const feedback = new Feedback();
-
-                    feedback.set("nome", nome);
-                    feedback.set("email", email);
-                    feedback.set("comentario", comentario);
-
-                    feedback
-                        .save()
-                        .then(() => {
-                            alert("Comentário enviado com sucesso!");
-
-                            // Limpar os campos
-                            document.getElementById("nome").value = "";
-                            document.getElementById("email").value = "";
-                            document.getElementById("comentario").value = "";
-
-                            // Se quiser ocultar o formulário após o envio:
-                            // document.getElementById("feedback_form").style.display = "none";
-
-                            loadFeedbacks(); // Reload feedbacks after successful submission
-                        })
-                        .catch((error) => {
-                            alert(
-                                "Erro ao enviar comentário: " + error.message,
-                            );
-                        });
-                });
-
-            function loadFeedbacks() {
-                const Feedback = Parse.Object.extend("Feedback");
-                const query = new Parse.Query(Feedback);
-
-                // Ordena os comentários pela data de criação em ordem decrescente
-                query.descending("createdAt");
-
-                query.find().then((results) => {
-                    const feedbackList =
-                        document.getElementById("feedback_list");
-                    feedbackList.innerHTML = "";
-
-                    results.forEach((feedback) => {
-                        const listItem = document.createElem
-ent("div");
-                        listItem.className = "feedback-item";
-                        listItem.innerHTML = `
-                    <p><strong>${feedback.get("nome")}</strong></p>
-                    <p>${feedback.get("comentario")}</p>
-                `;
-                        feedbackList.appendChild(listItem);
-                    });
-                });
-            }
-        </script>
-    </body>
+    <!-- Importar JavaScript -->
+    <script src="script.js"></script>
+</body>
 </html>

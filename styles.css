@@ -1,0 +1,78 @@
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    background-color: #1890ff; /* Cor primária do Ant Design */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #1890ff;
+}
+
+/* Animação leve para botões Ant Design */
+.ant-btn {
+    transition: transform 0.2s ease;
+}
+
+.ant-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Formulários */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+/* Estilo de inputs */
+.ant-input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+}
+
+/* Estilo da imagem do logo */
+.logo-educacional {
+    width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.logo-educacional:hover {
+    transform: scale(1.2);
+}
