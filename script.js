@@ -1,68 +1,51 @@
-// Configuração inicial para a integração com o Back4App
-const BACK4APP_APP_ID = 'P07Lo1xkiYBpzmDyt07tKd0Z8IWLp9Z9lNSkaJa5'; // Substitua por seu APP ID
-const BACK4APP_REST_API_KEY = 'HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9'; // Substitua pela sua REST API Key
-const BACK4APP_ENDPOINT = 'https://parseapi.back4app.com/classes/Feedback';
-
-// Função para enviar feedback
-async function enviarFeedback(nome, mensagem) {
-  try {
-    const response = await fetch(BACK4APP_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'X-Parse-Application-Id': BACK4APP_APP_ID,
-        'X-Parse-REST-API-Key': BACK4APP_REST_API_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        nome: nome,
-        mensagem: mensagem
-      })
+// Scroll suave para links de navegação
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
+});
 
-    if (response.ok) {
-      alert("Feedback enviado com sucesso!");
-    } else {
-      throw new Error("Erro ao enviar feedback");
+// Validação simples do formulário de busca
+document.querySelector("form").addEventListener("submit", function (e) {
+    const input = document.querySelector("input");
+    if (!input.value) {
+        e.preventDefault();
+        alert("Por favor, preencha o campo de busca.");
     }
-  } catch (error) {
-    console.error("Erro:", error);
-    alert("Ocorreu um erro ao enviar o feedback.");
-  }
-}
-// Função para buscar e exibir feedbacks
-async function buscarFeedbacks() {
-    try {
-      const response = await fetch(BACK4APP_ENDPOINT, {
-        method: 'GET',
-        headers: {
-          'X-Parse-Application-Id': BACK4APP_APP_ID,
-          'X-Parse-REST-API-Key': BACK4APP_REST_API_KEY,
+});
+
+// Exibir/ocultar menu suspenso ao clicar no botão de login/cadastro
+const loginSignupBtn = document.getElementById('loginSignupBtn');
+const loginSignupMenu = document.getElementById('loginSignupMenu');
+
+// Alternar a classe "active" para exibir o menu suspenso
+loginSignupBtn.addEventListener('click', function () {
+    loginSignupBtn.classList.toggle('active');
+    loginSignupMenu.classList.toggle('active');
+});
+
+// Gráfico com Chart.js
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+        datasets: [{
+            label: 'Progresso de Aprendizado',
+            data: [10, 20, 30, 40, 50, 60],
+            backgroundColor: 'rgba(92, 72, 238, 0.5)',
+            borderColor: 'rgba(92, 72, 238, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
         }
-      });
-  
-      const data = await response.json();
-      const feedbackContainer = document.getElementById("feedbacks");
-  
-      data.results.forEach(feedback => {
-        const feedbackElement = document.createElement("div");
-        feedbackElement.innerHTML = `<strong>${feedback.nome}</strong>: ${feedback.mensagem}`;
-        feedbackContainer.appendChild(feedbackElement);
-      });
-    } catch (error) {
-      console.error("Erro ao buscar feedbacks:", error);
     }
-  }
-  
-  // Chama a função para buscar feedbacks ao carregar a página
-  document.addEventListener("DOMContentLoaded", buscarFeedbacks);
-  
-
-// Captura o evento de envio do formulário de contato
-document.querySelector("#contato form").addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const nome = document.getElementById("nome").value;
-  const mensagem = document.getElementById("mensagem").value;
-
-  enviarFeedback(nome, mensagem);
 });
