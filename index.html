@@ -1,61 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script> <!-- Link para o arquivo JS -->
-    <title>Tech Education </title>
-  </head>
-  <body>
-    <nav>
-      <div class="nav__logo"><a href="#">Tech Education</a></div>
-      <ul class="nav__links">
-        <li class="link"><a href="#">Início</a></li>
-        <li class="link"><a href="#">Sobre Nós</a></li>
-        <li class="link"><a href="#">Serviços</a></li>
-        <li class="link"><a href="#">Cursos</a></li>
-        <li class="link"><a href="#">Blog</a></li>
-        <!-- Botão de login/cadastro -->
-        <li class="link">
-          <button id="loginSignupBtn" class="nav__btn">Cadastrar / Login</button>
-          <div id="loginSignupMenu" class="dropdown-menu">
-            <a href="#">Login</a>
-            <a href="#">Cadastrar</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="src/styles/styles.css" />
 
-    <section class="container">
-      <div class="content__container">
-        <h1>
-          Melhor Plataforma<br />
-          <span class="heading__1">de Educação</span><br />
-          <span class="heading__2">do Mundo</span>
-        </h1>
-        <p>
-          Libere todo o seu potencial de aprendizado com nossa plataforma educacional
-          intuitiva. Mesclando tecnologia e educação de forma inovadora, oferecemos um
-          ambiente de aprendizado imersivo que combina aulas interativas,
-          salas de aula virtuais e feedback inteligente.
-        </p>
-        <form>
-          <input type="text" placeholder="O que você quer aprender?" />
-          <button type="submit">Buscar Curso</button>
-        </form>
-      </div>
-      <div class="image__container">
-        <img src="assets/header-1.jpg" alt="cabeçalho" />
-        <img src="assets/header-2.jpg" alt="cabeçalho" />
-        <div class="image__content">
-          <ul>
-            <li>Aprenda sobre tecnologia</li>
-            <li>Profissionais especialistas</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </body>
+        <script
+            type="text/javascript"
+            src="https://npmcdn.com/parse/dist/parse.min.js"
+        ></script>
+
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <title>Food</title>
+        <script src="https://replit.com/public/js/repl-auth-v2.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav id="navbar">
+                <i class="fa-solid fa-laptop-code" id="nav_logo"> tech education</i>
+
+                <ul id="nav_list">
+                    <li class="nav-item active">
+                        <a href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#menu">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#testimonials">Comentarios</a>
+                    </li>
+                </ul>
+
+                <button class="btn-default">Peça aqui</button>
+
+                <button id="mobile_btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </nav>
+
+            <div id="mobile_menu">
+                <ul id="mobile_nav_list">
+                    <li class="nav-item">
+                        <a href="#home">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#menu">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#testimonials">comentarios</a>
+                    </li>
+                </ul>
+
+                <button class="btn-default">Peça aqui</button>
+            </div>
+        </header>
+
+    
+
+            <section id="testimonials">
+                <img
+                    src="src/images/iconedeuser.png"
+                    id="testimonial_chef"
+                    alt="chefe"
+                />
+
+                <div id="testemonials_content">
+                    <h2 class="section-title">Tela de Login</h2>
+            
+
+                    <div id="feedbacks">
+                        <div class="feedback">
+                            <img
+                                src="src/images/avatar.png"
+                                class="feedback-avatar"
+                                alt="avatar"
+                            />
+
+                            <div class="feedback-content">
+                                <form id="feedback_form">
+                                    <label for="nome">Nome:</label><br />
+                                    <input
+                                        type="text"
+                                        id="nome"
+                                        name="nome"
+                                        required
+                                    /><br /><br />
+
+                                    <label for="email">Email:</label><br />
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        required
+                                    /><br /><br />
+
+                                    <label for="comentario">Comentário:</label
+                                    ><br />
+                                    <textarea
+                                        id="comentario"
+                                        name="comentario"
+                                        rows="4"
+                                        cols="50"
+                                        required
+                                    ></textarea
+                                    ><br /><br />
+
+                                    <input
+                                        type="submit"
+                                        value="Enviar Comentário"
+                                    />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section for displaying existing comments -->
+                    <div id="existing_feedbacks">
+                        <h3>Comentários Recentes:</h3>
+                        <div id="feedback_list"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div id="footer_items">
+                <span id="copyrigth"> &copy 2024 UNIFOR </span>
+
+                <div class="social-media-buttons">
+                    <a href="#">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+        <script src="src/javascript/script.js"></script>
+        <script>
+            // Initialize Parse
+            Parse.initialize(
+                "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
+                "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9",
+            );
+            Parse.serverURL = "https://parseapi.back4app.com/";
+
+            // Handle form submission
+            document
+                .getElementById("feedback_form")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    const nome = document.getElementById("nome").value;
+                    const email = document.getElementById("email").value;
+                    const comentario =
+                        document.getElementById("comentario").value;
+
+                    const Feedback = Parse.Object.extend("Feedback");
+                    const feedback = new Feedback();
+
+                    feedback.set("nome", nome);
+                    feedback.set("email", email);
+                    feedback.set("comentario", comentario);
+
+                    feedback
+                        .save()
+                        .then(() => {
+                            alert("Comentário enviado com sucesso!");
+
+                            // Limpar os campos
+                            document.getElementById("nome").value = "";
+                            document.getElementById("email").value = "";
+                            document.getElementById("comentario").value = "";
+
+                            // Se quiser ocultar o formulário após o envio:
+                            // document.getElementById("feedback_form").style.display = "none";
+
+                            loadFeedbacks(); // Reload feedbacks after successful submission
+                        })
+                        .catch((error) => {
+                            alert(
+                                "Erro ao enviar comentário: " + error.message,
+                            );
+                        });
+                });
+
+            function loadFeedbacks() {
+                const Feedback = Parse.Object.extend("Feedback");
+                const query = new Parse.Query(Feedback);
+
+                // Ordena os comentários pela data de criação em ordem decrescente
+                query.descending("createdAt");
+
+                query.find().then((results) => {
+                    const feedbackList =
+                        document.getElementById("feedback_list");
+                    feedbackList.innerHTML = "";
+
+                    results.forEach((feedback) => {
+                        const listItem = document.createElem
+ent("div");
+                        listItem.className = "feedback-item";
+                        listItem.innerHTML = `
+                    <p><strong>${feedback.get("nome")}</strong></p>
+                    <p>${feedback.get("comentario")}</p>
+                `;
+                        feedbackList.appendChild(listItem);
+                    });
+                });
+            }
+        </script>
+    </body>
 </html>
