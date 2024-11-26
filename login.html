@@ -5,41 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/parse@3.1.2/dist/parse.min.js"></script> <!-- Adicionando o Parse SDK -->
 </head>
+
 <body>
-    <nav>
-        <div class="nav__logo">
-          <a href="index.html">Tech Education</a>
+  <nav>
+    <div class="nav__logo">
+      <a href="index.html">Tech Education</a>
+    </div>
+    <ul class="nav__links">
+      <li class="link"><a href="index.html">Início</a></li>
+      <li class="link"><a href="sobre.html">Sobre Nós</a></li>
+      <li class="link"><a href="servicos.html">Serviços</a></li>
+      <li class="link"><a href="cursos.html">Cursos</a></li>
+      <li class="link"><a href="blog.html">Blog</a></li>
+      <li class="link">
+        <button id="loginSignupBtn" class="nav__btn">Cadastrar / Login</button>
+        <div id="loginSignupMenu" class="dropdown-menu">
+          <a href="login.html">Login</a>
+          <a href="cadastro.html">Cadastrar</a>
         </div>
-        <ul class="nav__links">
-          <li class="link"><a href="index.html">Início</a></li>
-          <li class="link"><a href="sobre.html">Sobre Nós</a></li>
-          <li class="link"><a href="servicos.html">Serviços</a></li>
-          <li class="link"><a href="cursos.html">Cursos</a></li>
-          <li class="link"><a href="blog.html">Blog</a></li>
-          <li class="link">
-            <button id="loginSignupBtn" class="nav__btn">Cadastrar / Login</button>
-            <div id="loginSignupMenu" class="dropdown-menu">
-              <a href="login.html">Login</a>
-              <a href="cadastro.html">Cadastrar</a>
-            </div>
-          </li>
-        </ul>
-      </nav>
+      </li>
+    </ul>
+  </nav>
+
   <div class="container">
     <div class="content__container">
       <h1>Bem-vindo de volta</h1>
       <p>Faça login para acessar sua conta.</p>
-      <form action="#" method="POST">
+      <form id="loginForm">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" placeholder="Seu email" required>
-        
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" placeholder="Sua senha" required>
-        
+      
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+      
         <button type="submit">Entrar</button>
       </form>
+      
     </div>
   </div>
+
+  <script>
+    // Inicialização do Back4App
+    Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
+    Parse.serverURL = "https://parseapi.back4app.com/";
+  
+    // Função de login
+    document.querySelector("#loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault(); // Impede o envio do formulário padrão
+  
+      const email = document.querySelector("#email").value;
+      const password = document.querySelector("#password").value;
+  
+      if (email && password) {
+        try {
+          // Tentando logar o usuário com o Back4App
+          const user = await Parse.User.logIn(email, password);
+          alert("Bem-vindo de volta, " + user.get("username") + "!"); // Sucesso no login
+          window.location.href = "index.html"; // Redireciona após o login
+        } catch (error) {
+          alert("Erro ao fazer login: " + error.message);
+        }
+      } else {
+        alert("Preencha todos os campos!");
+      }
+    });
+  </script>
+  
 </body>
 </html>
