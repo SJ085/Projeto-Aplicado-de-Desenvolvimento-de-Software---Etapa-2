@@ -27,25 +27,12 @@ loginSignupBtn.addEventListener('click', function () {
     loginSignupMenu.classList.toggle('active');
 });
 
-// Gráfico com Chart.js
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-        datasets: [{
-            label: 'Progresso de Aprendizado',
-            data: [10, 20, 30, 40, 50, 60],
-            backgroundColor: 'rgba(92, 72, 238, 0.5)',
-            borderColor: 'rgba(92, 72, 238, 1)',
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
+// Controle do menu sanduíche
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav__links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('mobile');
+  hamburger.classList.toggle('active');
 });
+
