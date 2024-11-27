@@ -40,38 +40,41 @@
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
       
-        <button type="submit">Entrar</button>
-      </form>
+        <button id="login">Entrar</button>
+        <p id="login-status"></p>
+      
+        <script>
+          // Inicializando o Parse
+          Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
+          Parse.serverURL = "https://parseapi.back4app.com/";
+      
+          // Função para autenticar usuário
+          async function loginUser(username, password) {
+            try {
+              const user = await Parse.User.logIn(username, password);
+              document.getElementById("login-status").textContent = "Login realizado com sucesso!";
+              console.log("Usuário autenticado:", user);
+            } catch (error) {
+              document.getElementById("login-status").textContent = "Erro no login: " + error.message;
+              console.error("Erro ao autenticar:", error);
+            }
+          }
+      
+          // Evento do botão de login
+          document.getElementById("login").addEventListener("click", () => {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+      
+            if (username && password) {
+              loginUser(username, password);
+            } else {
+              document.getElementById("login-status").textContent = "Por favor, preencha todos os campos.";
+            }
+          });
+        </script>
       
     </div>
   </div>
 
-  <script>
-    // Inicialização do Back4App
-    Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
-    Parse.serverURL = "https://parseapi.back4app.com/";
-  
-    // Função de login
-    document.querySelector("#loginForm").addEventListener("submit", async function (event) {
-      event.preventDefault(); // Impede o envio do formulário padrão
-  
-      const email = document.querySelector("#email").value;
-      const password = document.querySelector("#password").value;
-  
-      if (email && password) {
-        try {
-          // Tentando logar o usuário com o Back4App
-          const user = await Parse.User.logIn(email, password);
-          alert("Bem-vindo de volta, " + user.get("username") + "!"); // Sucesso no login
-          window.location.href = "index.html"; // Redireciona após o login
-        } catch (error) {
-          alert("Erro ao fazer login: " + error.message);
-        }
-      } else {
-        alert("Preencha todos os campos!");
-      }
-    });
-  </script>
-  
 </body>
 </html>

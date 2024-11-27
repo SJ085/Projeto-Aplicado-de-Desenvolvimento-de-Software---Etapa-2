@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.2.1/parse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.4.2/parse.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script> <!-- Link para o arquivo JS -->
     <title>Cadastro - Tech Education</title>
@@ -40,12 +40,58 @@
           Cadastro<br />
           <span class="heading__1">de Conta</span>
         </h1>
-        <form>
-          <input type="text" placeholder="Nome Completo" />
-          <input type="email" placeholder="E-mail" />
-          <input type="password" placeholder="Senha" />
-          <button type="submit">Cadastrar</button>
-        </form>
+        <form id="cadastroForm">
+          <input type="text" id="nomeCompleto" placeholder="Nome Completo" required />
+          <input type="email" id="email" placeholder="E-mail" required />
+          <input type="password" id="senha" placeholder="Senha" required />
+          <button id="register">Registrar Usuário</button>
+
+  <script>
+    Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
+    Parse.serverURL = "https://parseapi.back4app.com/";
+
+    // Função para adicionar um novo usuário
+    async function addUser(username, password) {
+      const user = new Parse.User();
+      user.set("username", username);
+      user.set("password", password);
+
+      try {
+        await user.signUp();
+        alert("Usuário cadastrado com sucesso!");
+        console.log("Usuário registrado:", user);
+      } catch (error) {
+        alert("Erro ao cadastrar: " + error.message);
+        console.error("Erro ao registrar usuário:", error);
+      }
+    }
+
+    // Teste de conexão com o Back4App
+    (async () => {
+      try {
+        const serverHealth = await fetch("https://parseapi.back4app.com/health");
+        if (serverHealth.ok) {
+          console.log("Conexão com o Back4App está funcionando!");
+        } else {
+          console.error("Problema ao conectar ao servidor do Back4App.");
+        }
+      } catch (error) {
+        console.error("Erro ao verificar a conexão com o Back4App:", error);
+      }
+    })();
+
+    // Evento para registrar o usuário
+    document.getElementById("register").addEventListener("click", () => {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (username && password) {
+        addUser(username, password);
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
+    });
+  </script>
       </div>
       <div class="image__container">
         <img src="assets/img/img9.jpg" alt="cabeçalho" />
