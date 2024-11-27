@@ -59,27 +59,31 @@
       Parse.serverURL = "https://parseapi.back4app.com/";
 
       // Função para adicionar um novo usuário
-      async function addUser(nomeCompleto, email, senha) {
-        const user = new Parse.User();
-        user.set("username", email); // Usando o email como username
-        user.set("password", senha);
-        user.set("email", email);
-        user.set("nomeCompleto", nomeCompleto);
+      // Função para adicionar um novo usuário
+async function addUser(nomeCompleto, email, senha) {
+  const user = new Parse.User();
+  user.set("username", email); // Usando o email como username
+  user.set("password", senha);
+  user.set("email", email);
+  user.set("nomeCompleto", nomeCompleto);
 
-        try {
-          // Tentando registrar o usuário
-          await user.signUp();
-          
-          // Esconde o formulário e exibe a mensagem de sucesso
-          document.getElementById("cadastroForm").style.display = "none";
-          document.getElementById("successMessage").style.display = "block";
-          console.log("Usuário registrado:", user);
-        } catch (error) {
-          // Exibe erro detalhado no console e alerta o usuário
-          alert("Erro ao cadastrar: " + error.message);
-          console.error("Erro ao registrar usuário:", error);
-        }
-      }
+  try {
+    // Deslogar qualquer usuário logado anteriormente
+    await Parse.User.logOut();
+
+    // Tentando registrar o usuário
+    await user.signUp();
+    
+    // Esconde o formulário e exibe a mensagem de sucesso
+    document.getElementById("cadastroForm").style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+    console.log("Usuário registrado:", user);
+  } catch (error) {
+    // Exibe erro detalhado no console e alerta o usuário
+    alert("Erro ao cadastrar: " + error.message);
+    console.error("Erro ao registrar usuário:", error);
+  }
+}
 
       // Evento para tratar o envio do formulário
       document

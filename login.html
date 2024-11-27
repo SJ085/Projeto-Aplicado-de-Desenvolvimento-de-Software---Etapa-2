@@ -40,57 +40,48 @@
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
       
-        <button id="login">Entrar</button>
+        <button id="login" type="submit">Entrar</button>
         <p id="login-status"></p>
-      
-        <script>
-      // Inicialização do Parse
-      Parse.initialize(
-        "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
-        "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9"
-      );
-      Parse.serverURL = "https://parseapi.back4app.com/";
-
-      // Função para adicionar um novo usuário
-      async function addUser(nomeCompleto, email, senha) {
-        const user = new Parse.User();
-        user.set("username", email); // Usando o email como username
-        user.set("password", senha);
-        user.set("email", email);
-        user.set("nomeCompleto", nomeCompleto);
-
-        try {
-          await user.signUp();
-
-          // Esconde o formulário e exibe a mensagem de sucesso
-          document.getElementById("cadastroForm").style.display = "none";
-          document.getElementById("successMessage").style.display = "block";
-          console.log("Usuário registrado:", user);
-        } catch (error) {
-          alert("Erro ao cadastrar: " + error.message);
-          console.error("Erro ao registrar usuário:", error);
-        }
-      }
-
-      // Evento para tratar o envio do formulário
-      document
-        .getElementById("cadastroForm")
-        .addEventListener("submit", (event) => {
-          event.preventDefault(); // Previne o recarregamento da página
-          const nomeCompleto = document.getElementById("nomeCompleto").value;
-          const email = document.getElementById("email").value;
-          const senha = document.getElementById("senha").value;
-
-          if (nomeCompleto && email && senha) {
-            addUser(nomeCompleto, email, senha);
-          } else {
-            alert("Por favor, preencha todos os campos.");
-          }
-        });
-    </script>
-      
+      </form>
     </div>
   </div>
 
+  <script>
+    // Inicialização do Parse
+    Parse.initialize(
+      "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
+      "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9"
+    );
+    Parse.serverURL = "https://parseapi.back4app.com/";
+
+    // Função de Login
+    async function loginUser(email, senha) {
+      try {
+        const user = await Parse.User.logIn(email, senha);
+        // Exibe mensagem de sucesso
+        document.getElementById("login-status").style.color = "green";
+        document.getElementById("login-status").textContent = "Login realizado com sucesso!";
+        console.log("Usuário logado:", user);
+      } catch (error) {
+        // Exibe mensagem de erro
+        document.getElementById("login-status").style.color = "red";
+        document.getElementById("login-status").textContent = "Erro ao fazer login: " + error.message;
+        console.error("Erro ao logar usuário:", error);
+      }
+    }
+
+    // Evento para tratar o envio do formulário de login
+    document.getElementById("loginForm").addEventListener("submit", (event) => {
+      event.preventDefault(); // Previne o recarregamento da página
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      if (email && senha) {
+        loginUser(email, senha);
+      } else {
+        alert("Por favor, preencha todos os campos.");
+      }
+    });
+  </script>
 </body>
 </html>
