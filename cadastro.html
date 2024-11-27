@@ -6,30 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.4.2/parse.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="script.js"></script> <!-- Link para o arquivo JS -->
     <title>Cadastro - Tech Education</title>
   </head>
   <body>
     <nav>
       <div class="nav__logo">
-        <a href="index.html">Tech Education</a> <!-- Redireciona para a página inicial -->
+        <a href="index.html">Tech Education</a>
       </div>
-
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
       <ul class="nav__links">
-        <li class="link"><a href="index.html">Início</a></li> <!-- Página inicial -->
-        <li class="link"><a href="sobre.html">Sobre Nós</a></li> <!-- Página sobre nós -->
-        <li class="link"><a href="servicos.html">Serviços</a></li> <!-- Página serviços -->
-        <li class="link"><a href="cursos.html">Cursos</a></li> <!-- Página de cursos -->
-        <li class="link"><a href="blog.html">Blog</a></li> <!-- Página do blog -->
-        <!-- Botão de login/cadastro -->
+        <li class="link"><a href="index.html">Início</a></li>
+        <li class="link"><a href="sobre.html">Sobre Nós</a></li>
+        <li class="link"><a href="servicos.html">Serviços</a></li>
+        <li class="link"><a href="cursos.html">Cursos</a></li>
+        <li class="link"><a href="blog.html">Blog</a></li>
         <li class="link">
-          <a href="cadastro.html" class="nav__btn">Cadastrar / Login</a> <!-- Redireciona para a página de cadastro -->
+          <a href="cadastro.html" class="nav__btn">Cadastrar / Login</a>
         </li>
       </ul>
     </nav>
@@ -40,69 +31,71 @@
           Cadastro<br />
           <span class="heading__1">de Conta</span>
         </h1>
+        <!-- Formulário de Cadastro -->
         <form id="cadastroForm">
-          <input type="text" id="nomeCompleto" placeholder="Nome Completo" required />
+          <input
+            type="text"
+            id="nomeCompleto"
+            placeholder="Nome Completo"
+            required
+          />
           <input type="email" id="email" placeholder="E-mail" required />
           <input type="password" id="senha" placeholder="Senha" required />
-          <button id="register">Registrar Usuário</button>
-
-  <script>
-    Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
-    Parse.serverURL = "https://parseapi.back4app.com/";
-
-    // Função para adicionar um novo usuário
-    async function addUser(username, password) {
-      const user = new Parse.User();
-      user.set("username", username);
-      user.set("password", password);
-
-      try {
-        await user.signUp();
-        alert("Usuário cadastrado com sucesso!");
-        console.log("Usuário registrado:", user);
-      } catch (error) {
-        alert("Erro ao cadastrar: " + error.message);
-        console.error("Erro ao registrar usuário:", error);
-      }
-    }
-
-    // Teste de conexão com o Back4App
-    (async () => {
-      try {
-        const serverHealth = await fetch("https://parseapi.back4app.com/health");
-        if (serverHealth.ok) {
-          console.log("Conexão com o Back4App está funcionando!");
-        } else {
-          console.error("Problema ao conectar ao servidor do Back4App.");
-        }
-      } catch (error) {
-        console.error("Erro ao verificar a conexão com o Back4App:", error);
-      }
-    })();
-
-    // Evento para registrar o usuário
-    document.getElementById("register").addEventListener("click", () => {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-
-      if (username && password) {
-        addUser(username, password);
-      } else {
-        alert("Por favor, preencha todos os campos.");
-      }
-    });
-  </script>
-      </div>
-      <div class="image__container">
-        <img src="assets/img/img9.jpg" alt="cabeçalho" />
-        <img src="assets/img/img8.png" alt="cabeçalho" />
-        <div class="image__content">
-          <ul>
-            <li>Aprenda sobre tecnologia</li>
-            <li>Profissionais especialistas</li>
-          </ul>
-        </div>
+          <button type="submit">Registrar Usuário</button>
+        </form>
+        <!-- Mensagem de sucesso -->
+        <p id="successMessage" style="display: none; color: green; font-weight: bold;">
+          Cadastro realizado com sucesso! Bem-vindo à Tech Education.
+        </p>
       </div>
     </section>
+
+    <script>
+      // Inicialização do Parse
+      Parse.initialize(
+        "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
+        "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9"
+      );
+      Parse.serverURL = "https://parseapi.back4app.com/";
+
+      // Função para adicionar um novo usuário
+      async function addUser(nomeCompleto, email, senha) {
+        const user = new Parse.User();
+        user.set("username", email); // Usando o email como username
+        user.set("password", senha);
+        user.set("email", email);
+        user.set("nomeCompleto", nomeCompleto);
+
+        try {
+          // Tentando registrar o usuário
+          await user.signUp();
+          
+          // Esconde o formulário e exibe a mensagem de sucesso
+          document.getElementById("cadastroForm").style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+          console.log("Usuário registrado:", user);
+        } catch (error) {
+          // Exibe erro detalhado no console e alerta o usuário
+          alert("Erro ao cadastrar: " + error.message);
+          console.error("Erro ao registrar usuário:", error);
+        }
+      }
+
+      // Evento para tratar o envio do formulário
+      document
+        .getElementById("cadastroForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault(); // Previne o recarregamento da página
+          const nomeCompleto = document.getElementById("nomeCompleto").value;
+          const email = document.getElementById("email").value;
+          const senha = document.getElementById("senha").value;
+
+          if (nomeCompleto && email && senha) {
+            addUser(nomeCompleto, email, senha);
+          } else {
+            alert("Por favor, preencha todos os campos.");
+          }
+        });
+    </script>
   </body>
 </html>

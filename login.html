@@ -44,34 +44,50 @@
         <p id="login-status"></p>
       
         <script>
-          // Inicializando o Parse
-          Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
-          Parse.serverURL = "https://parseapi.back4app.com/";
-      
-          // Função para autenticar usuário
-          async function loginUser(username, password) {
-            try {
-              const user = await Parse.User.logIn(username, password);
-              document.getElementById("login-status").textContent = "Login realizado com sucesso!";
-              console.log("Usuário autenticado:", user);
-            } catch (error) {
-              document.getElementById("login-status").textContent = "Erro no login: " + error.message;
-              console.error("Erro ao autenticar:", error);
-            }
+      // Inicialização do Parse
+      Parse.initialize(
+        "7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU",
+        "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9"
+      );
+      Parse.serverURL = "https://parseapi.back4app.com/";
+
+      // Função para adicionar um novo usuário
+      async function addUser(nomeCompleto, email, senha) {
+        const user = new Parse.User();
+        user.set("username", email); // Usando o email como username
+        user.set("password", senha);
+        user.set("email", email);
+        user.set("nomeCompleto", nomeCompleto);
+
+        try {
+          await user.signUp();
+
+          // Esconde o formulário e exibe a mensagem de sucesso
+          document.getElementById("cadastroForm").style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+          console.log("Usuário registrado:", user);
+        } catch (error) {
+          alert("Erro ao cadastrar: " + error.message);
+          console.error("Erro ao registrar usuário:", error);
+        }
+      }
+
+      // Evento para tratar o envio do formulário
+      document
+        .getElementById("cadastroForm")
+        .addEventListener("submit", (event) => {
+          event.preventDefault(); // Previne o recarregamento da página
+          const nomeCompleto = document.getElementById("nomeCompleto").value;
+          const email = document.getElementById("email").value;
+          const senha = document.getElementById("senha").value;
+
+          if (nomeCompleto && email && senha) {
+            addUser(nomeCompleto, email, senha);
+          } else {
+            alert("Por favor, preencha todos os campos.");
           }
-      
-          // Evento do botão de login
-          document.getElementById("login").addEventListener("click", () => {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-      
-            if (username && password) {
-              loginUser(username, password);
-            } else {
-              document.getElementById("login-status").textContent = "Por favor, preencha todos os campos.";
-            }
-          });
-        </script>
+        });
+    </script>
       
     </div>
   </div>
