@@ -1,41 +1,44 @@
 Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
 Parse.serverURL = "https://parseapi.back4app.com/";
 
-// Função para adicionar um novo usuário
-async function addUser(username, password) {
-    const User = new Parse.User();
-    User.set("username", username);
-    User.set("password", password);
+// Função para salvar usuários
+document.querySelector("#btnCadastrar").addEventListener("click", async function () {
+  // Obter os valores dos campos do formulário
+  const nome = document.querySelector("#nome").value;
+  const email = document.querySelector("#email").value;
+  const password = "senha-padrao"; // Defina ou solicite uma senha no formulário
+
+  // Verificar se os campos estão preenchidos
+  if (nome && email) {
     try {
-        await User.signUp();
-        alert("Usuário cadastrado com sucesso!");
+      // Criar um novo usuário
+      const user = new Parse.User();
+      user.set("username", nome);
+      user.set("email", email);
+      user.set("password", password);
+
+      // Salvar no Back4App
+      await user.signUp();
+      alert("Usuário cadastrado com sucesso!");
+
+      // Limpar os campos do formulário após o cadastro
+      document.querySelector("#formCadastro").reset();
     } catch (error) {
-        alert("Erro ao cadastrar: " + error.message);
+      alert("Erro ao cadastrar usuário: " + error.message);
     }
-}
-(async () => {
-    try {
-      const serverHealth = await fetch("https://parseapi.back4app.com/health");
-      if (serverHealth.ok) {
-        console.log("Conexão com o Back4App está funcionando!");
-      } else {
-        console.error("Problema ao conectar ao servidor do Back4App.");
-      }
-    } catch (error) {
-      console.error("Erro ao verificar a conexão com o Back4App:", error);
-    }
-  })();
-  document.getElementById("register").addEventListener("click", async () => {
-    const user = new Parse.User();
-    user.set("username", "testUser");
-    user.set("password", "123456");
-    user.set("email", "testuser@example.com");
+  } else {
+    alert("Preencha todos os campos!");
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav__links');
   
-    try {
-      const result = await user.signUp();
-      console.log("Usuário registrado com sucesso:", result);
-    } catch (error) {
-      console.error("Erro ao registrar usuário:", error);
-    }
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
   });
-    
+});
+
+
+

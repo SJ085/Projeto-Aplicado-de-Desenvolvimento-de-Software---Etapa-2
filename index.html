@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.2.1/parse.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js"></script> <!-- Link para o arquivo JS -->
     <title>Tech Education</title>
   </head>
   <body>
@@ -63,38 +61,7 @@
         </div>
       </div>
     </section>
-    <form id="signupForm">
-      <input type="text" id="username" placeholder="Usuário" required />
-      <input type="password" id="password" placeholder="Senha" required />
-      <input type="email" id="email" placeholder="E-mail" required />
-      <button type="submit">Cadastrar</button>
-  </form>
-  
-  <script src="https://cdn.jsdelivr.net/npm/parse/dist/parse.min.js"></script>
-  <script>
-      Parse.initialize("7dSGhRME1sWvHdbkzBgxIesJ11zipcHh7P9fJtmU", "HjifmXBfFlqz7Nx6732qm4wYe78dvIEqAa0aowO9");
-      Parse.serverURL = "https://parseapi.back4app.com/";
-  
-      document.getElementById('signupForm').addEventListener('submit', async (event) => {
-          event.preventDefault();
-  
-          const username = document.getElementById('username').value;
-          const password = document.getElementById('password').value;
-          const email = document.getElementById('email').value;
-  
-          const user = new Parse.User();
-          user.set("username", username);
-          user.set("password", password);
-          user.set("email", email);
-  
-          try {
-              await user.signUp();
-              alert("Usuário cadastrado com sucesso!");
-          } catch (error) {
-              alert("Erro ao cadastrar: " + error.message);
-          }
-      });
-  </script>
-  
+    <script src="script.js"></script> <!-- Link para o arquivo JS -->
+
   </body>
 </html>
