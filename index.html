@@ -25,9 +25,14 @@
         <li class="link"><a href="servicos.html">Serviços</a></li> <!-- Página serviços -->
         <li class="link"><a href="cursos.html">Cursos</a></li> <!-- Página de cursos -->
         <li class="link"><a href="blog.html">Blog</a></li> <!-- Página do blog -->
-        <!-- Botão de login/cadastro -->
-        <li class="link">
-          <a href="cadastro.html" class="nav__btn">Cadastrar / Login</a> <!-- Redireciona para a página de cadastro -->
+
+        <!-- Botão de login/cadastro com dropdown -->
+        <li class="link dropdown">
+          <a href="#" class="nav__btn">Cadastrar / Login</a> <!-- Botão principal -->
+          <ul class="dropdown__menu">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="cadastro.html">Cadastrar</a></li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -62,6 +67,5 @@
       </div>
     </section>
     <script src="script.js"></script> <!-- Link para o arquivo JS -->
-
   </body>
 </html>

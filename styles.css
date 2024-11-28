@@ -72,6 +72,51 @@ nav {
   background-color: var(--primary-color-dark);
 }
 
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Posiciona logo abaixo do botão */
+  left: 0;
+  background-color: var(--white);
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000; /* Certifica-se de que está acima de outros elementos */
+}
+
+.dropdown__menu li {
+  padding: 10px 20px;
+  white-space: nowrap; /* Evita quebra de texto */
+}
+
+.dropdown__menu li a {
+  text-decoration: none;
+  color: var(--text-color);
+  display: block;
+}
+
+.dropdown__menu li a:hover {
+  color: var(--primary-color);
+}
+
+/* Mostra o menu ao passar o mouse */
+.dropdown:hover .dropdown__menu {
+  display: block;
+}
+
+/* Alternativa para clique (JavaScript controlará a visibilidade) */
+.dropdown__menu.show {
+  display: block;
+}
+
+/* Hambúrguer para mobile */
 .hamburger {
   display: none;
   flex-direction: column;

@@ -32,13 +32,21 @@ document.querySelector("#btnCadastrar").addEventListener("click", async function
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Seleciona o botão hamburger e os links de navegação
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav__links');
-  
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
+
+  if (hamburger && navLinks) {
+    // Adiciona um evento de clique ao botão hamburger
+    hamburger.addEventListener('click', () => {
+      // Alterna a classe "active" no menu de navegação
+      navLinks.classList.toggle('mobile');
+      navLinks.classList.toggle('active');
+    });
+  }
 });
+
+
 
 
 
